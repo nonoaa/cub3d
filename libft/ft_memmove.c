@@ -3,38 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 17:54:51 by yson              #+#    #+#             */
-/*   Updated: 2021/05/10 22:51:06 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:15:03 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:15:04 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, unsigned int len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned int	count;
-	unsigned char	*result;
-	unsigned char	*from;
+	unsigned char	*dest;
+	unsigned char	*sc;
+	size_t			idx;
 
-	result = (unsigned char *)dst;
-	from = (unsigned char *)src;
-	count = 0;
-	if (result == from)
+	if (!dst && !src)
 		return (0);
-	if (dst <= src)
+	idx = -1;
+	dest = (unsigned char *)dst;
+	sc = (unsigned char *)src;
+	if (sc >= dest)
 	{
-		while (count < len)
+		while (++idx < len)
+			dest[idx] = sc[idx];
+	}
+	else
+	{
+		idx = len;
+		while (idx > 0)
 		{
-			result[count] = from[count];
-			count++;
+			dest[idx - 1] = sc[idx - 1];
+			idx--;
 		}
 	}
-	else if (dst > src)
-	{
-		while (len-- > 0)
-			result[len] = from[len];
-	}
-	return (result);
+	return (dst);
 }

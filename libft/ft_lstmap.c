@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/11 19:03:46 by yson              #+#    #+#             */
-/*   Updated: 2021/07/06 11:35:48 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:13:48 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:13:49 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,28 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*head;
-	t_list	*curr;
+	t_list	*tmp;
+	t_list	*new;
+	t_list	*lnext;
 
-	if (!lst || !*f)
+	if (!lst || !f)
 		return (0);
-	head = ft_lstnew(f(lst->content));
-	if (!head)
+	new = ft_lstnew(f(lst->content));
+	if (!new)
 		return (0);
+	tmp = new;
 	lst = lst->next;
 	while (lst)
 	{
-		curr = ft_lstnew(f(lst->content));
-		if (!curr)
+		lnext = ft_lstnew(f(lst->content));
+		if (!lnext)
 		{
-			ft_lstclear(&head, *del);
+			ft_lstclear(&tmp, del);
 			return (0);
 		}
-		ft_lstadd_back(&head, curr);
+		new->next = lnext;
+		new = lnext;
 		lst = lst->next;
 	}
-	return (head);
+	return (tmp);
 }

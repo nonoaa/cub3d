@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 19:15:07 by yson              #+#    #+#             */
-/*   Updated: 2021/05/12 15:23:02 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:17:08 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:17:10 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 char	*ft_strchr(const char *str, int c)
 {
-	unsigned char	*cur;
-	unsigned char	target;
+	char			*s;
+	unsigned char	find;
 
-	target = (unsigned char)c;
-	cur = (unsigned char *)str;
-	while (1)
-	{
-		if (*cur == target)
-			return ((char *)cur);
-		if (!*cur)
-			return (0);
-		cur++;
-	}
+	s = (char *)str;
+	find = (unsigned char)c;
+	while (*s)
+		if ((unsigned char)*s++ == find)
+			return (s - 1);
+	if ((unsigned char)*s == find)
+		return (s);
+	return (0);
 }

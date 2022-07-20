@@ -3,37 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/04 16:11:02 by yson              #+#    #+#             */
-/*   Updated: 2021/05/07 17:05:00 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:14:23 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:14:24 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dst, const void *src, int c, unsigned int n)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	unsigned int	i;
-	unsigned char	*result;
-	unsigned char	*from;
-	unsigned char	new_c;
+	unsigned char	*dest;
+	unsigned char	*sc;
+	size_t			idx;
 
-	i = 0;
-	new_c = (unsigned char)c;
-	result = (unsigned char *)dst;
-	from = (unsigned char *)src;
-	while (i < n)
+	if (n == 0)
+		return (NULL);
+	dest = (unsigned char *)dst;
+	sc = (unsigned char *)src;
+	idx = 0;
+	while (idx < n)
 	{
-		*result = *from;
-		if (*from == new_c)
-		{
-			result++;
-			return (result);
-		}
-		from++;
-		result++;
-		i++;
+		dest[idx] = sc[idx];
+		if (sc[idx++] == (unsigned char)c)
+			return (&dest[idx]);
 	}
-	return (0);
+	return (NULL);
 }

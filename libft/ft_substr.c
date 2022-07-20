@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/09 21:28:15 by yson              #+#    #+#             */
-/*   Updated: 2021/07/06 11:38:29 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:18:53 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:18:54 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,25 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*result;
-	size_t	new_len;
+	char			*ret;
+	unsigned int	idx;
 
-	if (ft_strlen(s) < start)
-		return (ft_strdup(""));
-	new_len = ft_strlen(s + start);
-	if (new_len < len)
-		len = new_len;
-	result = malloc(len + 1);
-	if (!result)
+	idx = 0;
+	if (!s)
 		return (0);
-	ft_strlcpy(result, s + start, len + 1);
-	return (result);
+	if (ft_strlen(s) < len)
+		len = ft_strlen(s);
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret)
+		return (0);
+	ret[0] = '\0';
+	if (ft_strlen(s) < start)
+		return (ret);
+	while (s[idx + start] != '\0' && idx < len)
+	{
+		ret[idx] = s[idx + start];
+		idx++;
+	}
+	ret[idx] = '\0';
+	return (ret);
 }

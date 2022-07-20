@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/09 21:55:26 by yson              #+#    #+#             */
-/*   Updated: 2021/07/06 11:30:34 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:17:17 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:17:18 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,27 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	size;
-	char	*result;
+	char	*ret;
+	size_t	idx;
+	size_t	idx2;
 
-	size = (ft_strlen(s1) + ft_strlen(s2));
-	result = malloc(size + 1);
-	if (!result)
+	idx = 0;
+	idx2 = 0;
+	if (!s1 || !s2)
 		return (0);
-	ft_strlcpy(result, s1, ft_strlen(s1) + 1);
-	ft_strlcat(result, s2, size + 1);
-	return (result);
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!ret)
+		return (0);
+	while (idx < ft_strlen(s1))
+	{
+		ret[idx] = s1[idx];
+		idx++;
+	}
+	while (idx2 < ft_strlen(s2))
+	{
+		ret[idx + idx2] = s2[idx2];
+		idx2++;
+	}
+	ret[idx + idx2] = '\0';
+	return (ret);
 }

@@ -3,62 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 01:02:08 by yson              #+#    #+#             */
-/*   Updated: 2021/07/06 11:39:59 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:18:43 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:18:44 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	check_back(const char *s1, const char *set)
+int	ft_isin(char c, char const *set)
 {
-	int		back_i;
-	int		len;
-
-	len = ft_strlen(s1);
-	back_i = 0;
-	while (back_i < len)
-	{
-		if (ft_strchr(set, s1[len - back_i - 1]) == 0)
-			break ;
-		back_i++;
-	}
-	return (len - back_i);
+	while (*set)
+		if (*set++ == c)
+			return (1);
+	return (0);
 }
 
-static int	check_forward(const char *s1, const char *set)
+int	ft_idx1(char const *s1, char const *set)
 {
-	int		i;
-	int		len;
+	int	idx;
 
-	i = 0;
-	len = ft_strlen(s1);
-	while (i < len)
+	idx = 0;
+	while (s1[idx] != '\0')
 	{
-		if (ft_strchr(set, s1[i]) == 0)
+		if (!ft_isin(s1[idx], set))
 			break ;
-		i++;
+		idx++;
 	}
-	return (i);
+	return (idx);
+}
+
+int	ft_idx2(char const *s1, char const *set)
+{
+	int	idx;
+
+	idx = ft_strlen(s1) - 1;
+	while (idx >= 0)
+	{
+		if (!ft_isin(s1[idx], set))
+			break ;
+		idx--;
+	}
+	if (idx == -1)
+		idx = ft_strlen(s1) - 1;
+	return (idx);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		i;
-	int		back_i;
-	char	*result;
+	char	*ret;
+	int		idx[3];
+	int		msize;
 
-	if (!set)
-		return (ft_strdup(s1));
-	i = check_forward(s1, set);
-	back_i = check_back(s1, set);
-	if (i >= back_i)
-		return (ft_strdup(""));
-	result = malloc(back_i - i + 1);
-	if (!result)
+	if (!s1)
 		return (0);
-	ft_strlcpy(result, s1 + i, back_i - i + 1);
-	return (result);
+	idx[0] = ft_idx1(s1, set);
+	idx[1] = ft_idx2(s1, set);
+	idx[2] = 0;
+	if (!set)
+		return ((char *)s1);
+	msize = idx[1] - idx[0] + 2;
+	if (s1[0] == '\0')
+		msize = 1;
+	ret = (char *)malloc(sizeof(char) * msize);
+	if (!ret)
+		return (0);
+	ret[0] = '\0';
+	while (idx[0] <= idx[1])
+		ret[idx[2]++] = s1[idx[0]++];
+	ret[idx[2]] = '\0';
+	return (ret);
 }

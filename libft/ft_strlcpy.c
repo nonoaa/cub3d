@@ -3,33 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 12:40:46 by yson              #+#    #+#             */
-/*   Updated: 2021/05/07 14:08:26 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:17:34 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:17:34 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned int	ft_strlcpy(char *dest, const char *src, unsigned int size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	unsigned int	i;
-	unsigned int	count;
+	size_t	ret;
 
-	i = 0;
-	count = 0;
-	while (src[count] != '\0')
+	ret = 0;
+	if (!dst || !src)
+		return (0);
+	while (ret + 1 < dstsize && src[ret] != '\0')
 	{
-		count++;
+		dst[ret] = src[ret];
+		ret++;
 	}
-	if (size == 0)
-		return (count);
-	while (src[i] != '\0' && i < size - 1)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (count);
+	if (dstsize != 0)
+		dst[ret] = '\0';
+	while (src[ret] != '\0')
+		ret++;
+	return (ret);
 }

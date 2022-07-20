@@ -3,106 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 12:34:48 by yson              #+#    #+#             */
-/*   Updated: 2021/07/06 11:37:58 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:16:57 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:16:58 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	free_all(char **str)
+static int	num_of_arg(char const *s, char c)
 {
-	int	i;
+	int		cnt;
+	int		idx;
 
-	i = 0;
-	while (str[i])
+	cnt = 1;
+	idx = 0;
+	while (s[idx] != '\0')
 	{
-		free(str[i]);
-		i++;
+		if (!idx && s[idx] != c)
+			cnt++;
+		if (s[idx++] == c)
+			if (s[idx] != c && s[idx])
+				cnt++;
 	}
-	free(str);
+	return (cnt);
 }
 
-static int	count_str(char *str, char c)
+static int	ft_strlench(char const *s, char c)
 {
-	int	i;
-	int	count;
+	int	idx;
 
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			i++;
-		else
-		{
-			count++;
-			while (str[i] && !(str[i] == c))
-				i++;
-		}
-	}
-	return (count);
+	idx = 0;
+	while (s[idx] != '\0' && s[idx] != c)
+		idx++;
+	return (idx);
 }
 
-static void	put_str(char *result, char *str, int index, int word_len)
+static void	ft_free(char **s, int i)
 {
-	int	j;
+	int	idx;
 
-	j = 0;
-	while (j < word_len)
-	{
-		result[j] = str[index - word_len + j];
-		j++;
-	}
-	result[j] = '\0';
+	idx = 0;
+	while (idx < i)
+		free(s[idx++]);
+	free(s);
 }
 
-static int	ft_split2(char ***result, char *str, char c, int word_count)
+static int	ft_malloc(char **ret, int *idx, int len, char const *s)
 {
-	int		i;
-	int		word_len;
-	int		count;
-
-	count = 0;
-	i = 0;
-	word_len = 0;
-	while (str[i] && count < word_count)
+	ret[*idx] = (char *)malloc(len + 1);
+	if (!ret[idx[0]])
 	{
-		while (str[i] == c && str[i])
-			i++;
-		while (!(str[i] == c) && str[i])
-		{
-			word_len++;
-			i++;
-		}
-		(*result)[count] = malloc(word_len + 1);
-		if (!(*result)[count])
-			return (0);
-		put_str((*result)[count], str, i, word_len);
-		word_len = 0;
-		count++;
+		ft_free(ret, idx[0]);
+		return (0);
 	}
-	(*result)[count] = 0;
+	idx[1] = 0;
+	while (idx[1] < len)
+		ret[idx[0]][idx[1]++] = s[idx[2]++];
+	ret[idx[0]++][idx[1]] = '\0';
 	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
-	int		word_count;
-	int		flag;
+	char	**ret;
+	int		idx[3];
+	int		len;
 
-	word_count = count_str((char *)s, c);
-	result = malloc(sizeof(char *) * (word_count + 1));
-	if (!result)
+	idx[0] = 0;
+	idx[2] = 0;
+	if (!s)
 		return (0);
-	flag = ft_split2(&result, (char *)s, c, word_count);
-	if (!flag)
+	ret = (char **)malloc(sizeof(char *) * num_of_arg(s, c));
+	if (!ret)
+		return (0);
+	while (idx[0] < num_of_arg(s, c) && s[idx[2]] != '\0')
 	{
-		free_all(result);
-		return (0);
+		len = ft_strlench(&s[idx[2]], c);
+		if (!len)
+		{
+			idx[2]++;
+			continue ;
+		}
+		if (!ft_malloc(ret, idx, len, s))
+			return (0);
 	}
-	return (result);
+	ret[num_of_arg(s, c) - 1] = 0;
+	return (ret);
 }

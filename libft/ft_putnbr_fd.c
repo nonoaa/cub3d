@@ -3,28 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 22:26:39 by yson              #+#    #+#             */
-/*   Updated: 2021/05/11 13:12:20 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:16:35 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:16:37 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static void	ft_writenum(int n, int fd)
+{
+	char	s;
+
+	if (n > 9)
+	{
+		ft_writenum(n / 10, fd);
+		ft_writenum(n % 10, fd);
+	}
+	else
+	{
+		s = n + '0';
+		write(fd, &s, 1);
+	}
+}
+
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n == -2147483648)
-	{
-		write(fd, "-2147483648", 11);
-		return ;
-	}
 	if (n < 0)
 	{
-		ft_putchar_fd('-', fd);
+		write(fd, "-", 1);
+		if (n == -2147483648)
+		{
+			write(fd, "2", 1);
+			n = -147483648;
+		}
 		n *= -1;
 	}
-	if (n > 9)
-		ft_putnbr_fd(n / 10, fd);
-	ft_putchar_fd('0' + n % 10, fd);
+	ft_writenum(n, fd);
 }

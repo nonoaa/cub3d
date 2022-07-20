@@ -3,56 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 19:12:51 by yson              #+#    #+#             */
-/*   Updated: 2021/07/06 11:42:10 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:11:21 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:11:22 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_numlen(int n)
+static int	ft_digit(int n)
 {
-	int	len;
+	int	dgt;
 
-	if (n > 0)
-		len = 0;
-	else
-		len = 1;
-	while (n != 0)
+	dgt = 1;
+	if (n < 0)
 	{
-		n /= 10;
-		len++;
+		if (n == -2147483648)
+			return (11);
+		dgt++;
+		n *= -1;
 	}
-	return (len);
+	while (n > 9)
+	{
+		n = n / 10;
+		dgt++;
+	}
+	return (dgt);
+}
+
+static void	ft_fillitoa(char *s, int n, int idx, int lidx)
+{
+	if (n > 9)
+	{
+		ft_fillitoa(s, n % 10, idx, lidx);
+		ft_fillitoa(s, n / 10, ++idx, lidx);
+	}
+	else
+	{
+		s[lidx - idx] = n + '0';
+		return ;
+	}
 }
 
 char	*ft_itoa(int n)
 {
-	int		n_len;
-	int		i;
-	char	*result;
+	char	*ret;
+	int		lidx;
 
-	n_len = ft_numlen(n);
-	i = n_len - 1;
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	result = malloc(n_len + 1);
-	if (!result)
+	ret = (char *)malloc(ft_digit(n) + 1);
+	if (!ret)
 		return (0);
-	if (n_len == 1)
-		result[0] = '0';
+	lidx = ft_digit(n);
+	ret[lidx] = '\0';
 	if (n < 0)
-		result[0] = '-';
-	while (n != 0)
 	{
-		if (n > 0)
-			result[i--] = 48 + n % 10;
-		else
-			result[i--] = 48 + -n % 10;
-		n /= 10;
+		ret[0] = '-';
+		if (n == -2147483648)
+		{
+			ret[1] = '2';
+			n = -147483648;
+		}
+		n *= -1;
 	}
-	result[n_len] = '\0';
-	return (result);
+	ft_fillitoa(ret, n, 0, lidx - 1);
+	return (ret);
 }

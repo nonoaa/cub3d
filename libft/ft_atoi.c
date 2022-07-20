@@ -3,38 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 18:01:42 by yson              #+#    #+#             */
-/*   Updated: 2022/05/30 17:10:41 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:09:25 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:09:40 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	ft_isblank(char c)
+{
+	if (c == ' ' || c == '\n' || c == '\r'
+		|| c == '\v' || c == '\f' || c == '\t')
+		return (1);
+	return (0);
+}
+
 int	ft_atoi(const char *str)
 {
-	int		i;
-	int		minus;
-	long	result;
+	char		*s;
+	long long	ret;
+	long long	flag;
 
-	result = 0;
-	minus = 1;
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		i++;
-	if (str[i] == '-')
-		minus *= -1;
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	s = (char *)str;
+	ret = 0;
+	flag = 1;
+	while (ft_isblank(*s))
+		s++;
+	if (*s == '-' || *s == '+')
+		if (*s++ == '-')
+			flag *= -1;
+	while (ft_isdigit(*s))
 	{
-		result = result * 10 + (str[i] - 48);
-		if (result > 2147483647 && minus == 1)
-			return (-1);
-		if (result > 2147483648 && minus == -1)
-			return (0);
-		i++;
+		ret = ret * 10 + *s - '0';
+		if (ret < 0)
+		{
+			if (flag < 0)
+				return (0);
+			else
+				return (-1);
+		}
+		s++;
 	}
-	return (result * minus);
+	return (ret * flag);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 19:22:27 by yson              #+#    #+#             */
-/*   Updated: 2021/05/12 15:25:31 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:18:33 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:18:34 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,24 @@
 
 char	*ft_strrchr(const char *str, int c)
 {
-	unsigned char			*cur;
-	int						i;
-	unsigned char			target;
+	char			*s;
+	char			*ret;
+	unsigned char	find;
+	int				flag;
 
-	i = 0;
-	target = (unsigned char)c;
-	cur = (unsigned char *)str;
-	while (cur[i])
-		i++;
-	if (target == 0)
-		return ((char *)(cur + i));
-	while (i >= 0)
+	s = (char *)str;
+	ret = 0;
+	find = (unsigned char)c;
+	flag = 1;
+	while (*s)
 	{
-		if (cur[i] == target)
-			return ((char *)(cur + i));
-		i--;
+		if ((unsigned char)*s++ == find)
+		{
+			ret = s - 1;
+			flag = 0;
+		}
 	}
-	return (0);
+	if ((unsigned char)*s == find && flag)
+		return (s);
+	return (ret);
 }

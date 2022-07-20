@@ -3,28 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 19:07:14 by yson              #+#    #+#             */
-/*   Updated: 2021/05/10 22:51:49 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:18:23 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:18:25 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *str, const char *to_find, size_t len)
+char	*ft_strnstr(const char *org, const char *sub, size_t len)
 {
-	size_t	n;
+	char	*origin;
+	char	*find;
+	size_t	i;
+	size_t	j;
 
-	n = ft_strlen((char *)to_find);
-	if (!*to_find)
-		return ((char *)str);
-	while (*str && len >= n)
+	i = 0;
+	origin = (char *)org;
+	find = (char *)sub;
+	if (!*find)
+		return (origin);
+	while (i < len && origin[i])
 	{
-		if (ft_strncmp(str, to_find, n) == 0)
-			return ((char *)str);
-		str++;
-		len--;
+		j = 0;
+		if (origin[i] == find[j])
+		{
+			while (origin[i + j] == find[j] && i + j < len)
+			{
+				if (find[j + 1] == '\0')
+					return (&origin[i]);
+				j++;
+			}
+		}
+		i++;
 	}
 	return (0);
 }

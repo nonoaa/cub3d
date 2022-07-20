@@ -3,31 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 12:29:38 by yson              #+#    #+#             */
-/*   Updated: 2021/05/07 17:08:59 by yson             ###   ########.fr       */
+/*   Created: 2022/06/24 20:14:40 by byahn             #+#    #+#             */
+/*   Updated: 2022/06/24 20:14:41 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, unsigned int n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char	*str1;
-	unsigned char	*str2;
-	unsigned int	i;
+	size_t			idx;
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
 
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	i = 0;
-	while (i < n)
+	idx = 0;
+	ptr1 = (unsigned char *)s1;
+	ptr2 = (unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while (idx < n)
 	{
-		if (str1[i] != str2[i])
-		{
-			return (str1[i] - str2[i]);
-		}
-		i++;
+		if (ptr1[idx] != ptr2[idx])
+			break ;
+		idx++;
 	}
-	return (0);
+	if (idx == n)
+		idx--;
+	return (ptr1[idx] - ptr2[idx]);
 }
