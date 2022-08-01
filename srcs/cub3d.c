@@ -14,7 +14,10 @@
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
-	printf("hello\n");
+	t_game	game;
+
+	ft_bzero(&game, sizeof(t_game));
+	if (!arg_check(argc, argv, &game.map))
+		err_exit("Wrong path");
+	init_game(&game);
 }
