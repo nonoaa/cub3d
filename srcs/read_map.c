@@ -36,7 +36,16 @@ t_type type_info(char *str)
 
 void handle_info(t_game *game, char *line, t_type type)
 {
-    
+    if (is_repeat(game, type))
+        err_exit("info repeated");
+    parse_info(&line, type);
+    if (type == E_NO || type == E_SO || type == E_WE || type == E_EA)
+		handle_texture(game, line, type);
+	else if (type == E_FLOOR || type == E_CEILING)
+		handle_color(&game->map, line, type);
+    else
+		ft_lstadd_back(&game->map.map_lst, ft_lstnew(ft_strdup(line)));
+    free(line);
 }
 
 void    read_map(t_game *game)
