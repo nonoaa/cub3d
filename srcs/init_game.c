@@ -34,6 +34,6 @@ void	init_game(t_game *game)
 	// 	}
 	// 	printf("\n");
 	// }
-	// check_map(game);
+	check_map(game);
 	game->win_ptr = mlx_new_window(game->mlx_ptr, WIDTH, HEIGHT, "cub3D");
 }

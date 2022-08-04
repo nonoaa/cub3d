@@ -20,4 +20,5 @@ int	main(int argc, char **argv)
 	if (!arg_check(argc, argv, &game.map))
 		err_exit("Wrong argument");
 	init_game(&game);
+	
 }

@@ -160,6 +160,18 @@ int arg_check(int argc, char **argv, t_map_info *map);
 
 /*
 ** =============================================================================
+** check_map.c
+** =============================================================================
+*/
+
+void	handle_character(t_game *game, char c, int row, int col);
+int	count_source(t_game *game, char **map);
+int	wall_surrounded(t_game *game, int row, int col);
+int	wall_check(t_game *game, int i, int j, char **map);
+void	check_map(t_game *game);
+
+/*
+** =============================================================================
 ** init_game.c
 ** =============================================================================
 */
@@ -179,6 +191,13 @@ void	get_width_height(int *wid, int *hei, t_list *head);
 void	fill_space(char **map, int wid, int hei);
 char **lst_to_arr(t_game *game, t_list *head);
 
+/*
+** =============================================================================
+** moving.c
+** =============================================================================
+*/
+
+void	rotate(t_game *game, double rot);
 
 /*
 ** =============================================================================

@@ -17,10 +17,11 @@ SOURCES = cub3d.c\
 			check_map.c\
 			get_next_line.c\
 			init_game.c\
+			lst_to_arr.c\
+			moving.c\
 			read_map_utils.c\
 			read_map.c\
 			utils.c\
-			lst_to_arr.c\
 			
 
 SRCS	= $(addprefix $(SRC)/, $(SOURCES))
