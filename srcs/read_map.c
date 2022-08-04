@@ -48,6 +48,23 @@ void handle_info(t_game *game, char *line, t_type type)
     free(line);
 }
 
+int map_info_check(t_map_info *info)
+{
+    if (!info->img[0].img_ptr)
+		return (0);
+	if (!info->img[1].img_ptr)
+		return (0);
+	if (!info->img[2].img_ptr)
+		return (0);
+	if (!info->img[3].img_ptr)
+		return (0);
+	if (!info->floor_flag)
+		return (0);
+	if (!info->ceiling_flag)
+		return (0);
+	return (1);
+}
+
 void    read_map(t_game *game)
 {
     char *line;
@@ -69,5 +86,7 @@ void    read_map(t_game *game)
 			err_exit("Wrong map information");
         handle_info(game, line, type);
     }
-
+    if (!map_info_check(&game->map))
+		err_exit("Missing source");
+    game->map.map = lst_to_arr(game, game->map.map_lst);
 }

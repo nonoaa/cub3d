@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+# include "get_next_line.h"
 
 # define HEIGHT 1240
 # define WIDTH 880
@@ -147,5 +148,71 @@ typedef enum e_type
 	E_CEILING,
 	E_MAP
 }	t_type;
+
+/*
+** =============================================================================
+** arg_check.c
+** =============================================================================
+*/
+
+int name_check(char *str);
+int arg_check(int argc, char **argv, t_map_info *map);
+
+/*
+** =============================================================================
+** init_game.c
+** =============================================================================
+*/
+
+void	init_key_state(t_key *key);
+void	init_player(t_player *player);
+void	init_game(t_game *game);
+
+/*
+** =============================================================================
+** lst_to_arr.c
+** =============================================================================
+*/
+
+void	free_node(void *content);
+void	get_width_height(int *wid, int *hei, t_list *head);
+void	fill_space(char **map, int wid, int hei);
+char **lst_to_arr(t_game *game, t_list *head);
+
+
+/*
+** =============================================================================
+** read_map_utils.c
+** =============================================================================
+*/
+
+int is_repeat(t_game *game, t_type type);
+void    parse_info(char** line, t_type type);
+t_img_info load_img(void *mlx, char *path);
+void handle_texture(t_game *game, char *path, t_type type);
+void handle_color(t_map_info *map, char *colors, t_type type);
+
+/*
+** =============================================================================
+** read_map.c
+** =============================================================================
+*/
+
+int	map_valid_check(char *str);
+t_type type_info(char *str);
+void handle_info(t_game *game, char *line, t_type type);
+void    read_map(t_game *game);
+
+/*
+** =============================================================================
+** utils.c
+** =============================================================================
+*/
+
+void	err_exit(char *str);
+void	free_split(char **split);
+int	arr_len(char **arr);
+int	ft_atoi_ad(const char *str);
+
 
 #endif

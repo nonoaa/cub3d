@@ -74,7 +74,7 @@ void handle_color(t_map_info *map, char *colors, t_type type)
     if (!split)
         err_exit("malloc error");
     len = arr_len(split);
-    if (split != 3)
+    if (len != 3)
         err_exit("wrong amount of value");
 	if (type == E_FLOOR)
 	{
