@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junylee <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 19:37:09 by junylee           #+#    #+#             */
-/*   Updated: 2022/07/20 20:05:43 by junylee          ###   ########.fr       */
+/*   Created: 2022/08/04 20:41:43 by junylee           #+#    #+#             */
+/*   Updated: 2022/08/04 20:41:44 by junylee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
-	t_game	game;
+	unsigned int	i;
 
-	ft_bzero(&game, sizeof(t_game));
-	if (!arg_check(argc, argv, &game.map))
-		err_exit("Wrong argument");
-	init_game(&game);
+	i = 0;
+	while (src[i] != '\0' && i < n)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < n)
+		i++;
+	return (dest);
 }
