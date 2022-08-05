@@ -230,8 +230,18 @@ void    read_map(t_game *game);
 
 void	err_exit(char *str);
 void	free_split(char **split);
-int	arr_len(char **arr);
-int	ft_atoi_ad(const char *str);
+int		arr_len(char **arr);
+int		ft_atoi_ad(const char *str);
 
+/*
+** =============================================================================
+** mlx.c
+** =============================================================================
+*/
+
+int		main_loop(t_game *game);
+int		key_press(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
+int		end_program(void);
 
 #endif

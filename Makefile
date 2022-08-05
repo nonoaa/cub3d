@@ -22,6 +22,7 @@ SOURCES = main.c\
 			read_map_utils.c\
 			read_map.c\
 			utils.c\
+			mlx.c\
 			
 
 SRCS	= $(addprefix $(SRC)/, $(SOURCES))
