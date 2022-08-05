@@ -26,14 +26,6 @@ void	init_game(t_game *game)
 	init_key_state(&game->key_state);
 	game->mlx_ptr = mlx_init();
 	read_map(game);
-	// for (int i = 0; i < game->map.map_height; i++)
-	// {
-	// 	for (int j = 0; j < game->map.map_width; j++)
-	// 	{
-	// 		printf("%c ", game->map.map[i][j]);
-	// 	}
-	// 	printf("\n");
-	// }
 	check_map(game);
 	game->win_ptr = mlx_new_window(game->mlx_ptr, WIDTH, HEIGHT, "cub3D");
 }
