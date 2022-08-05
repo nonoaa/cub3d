@@ -198,6 +198,7 @@ char **lst_to_arr(t_game *game, t_list *head);
 */
 
 void	rotate(t_game *game, double rot);
+void	moving(t_game *game);
 
 /*
 ** =============================================================================
@@ -243,5 +244,30 @@ int		main_loop(t_game *game);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 int		end_program(void);
+
+/*
+** =============================================================================
+** draw_background.c
+** =============================================================================
+*/
+
+void	draw_ceiling(t_img_info img, int ceiling);
+void	draw_floor(t_img_info img, int floor);
+
+/*
+** =============================================================================
+** draw_wall.c
+** =============================================================================
+*/
+
+void	draw_wall(t_game *game, t_img_info *img);
+
+/*
+** =============================================================================
+** draw_wall.c
+** =============================================================================
+*/
+
+void	draw_line(int x, t_game *game, t_img_info *img);
 
 #endif

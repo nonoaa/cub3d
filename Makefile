@@ -23,7 +23,11 @@ SOURCES = main.c\
 			read_map.c\
 			utils.c\
 			mlx.c\
+			draw_background.c\
+			draw_wall.c\
+			draw_wall2.c\
 			
+
 
 SRCS	= $(addprefix $(SRC)/, $(SOURCES))
 OBJS	= $(SRCS:.c=.o)

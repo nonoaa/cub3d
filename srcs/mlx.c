@@ -4,13 +4,13 @@ int	main_loop(t_game *game)
 {
 	t_img_info	screen;
 
-	// moving(game);
+	moving(game);
 	screen.img_ptr = mlx_new_image(game->mlx_ptr, WIDTH, HEIGHT);
 	screen.addr = mlx_get_data_addr(screen.img_ptr, &screen.bpp,
 			&screen.size_line, &screen.endian);
-	// draw_ceiling(screen, game->map.ceiling);
-	// draw_floor(screen, game->map.floor);
-	// draw_wall(game, &screen);
+	draw_ceiling(screen, game->map.ceiling);
+	draw_floor(screen, game->map.floor);
+	draw_wall(game, &screen);
 	// draw_minimap(game, &screen);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, screen.img_ptr, 0, 0);
 	mlx_destroy_image(game->mlx_ptr, screen.img_ptr);

@@ -17,7 +17,7 @@ void	init_player(t_player *player)
 	player->plane.x = 0;
 	player->plane.y = 0.66;
 	player->move_speed = 0.1;
-	player->rot_speed = 0.1;
+	player->rot_speed = 0.05;
 }
 
 void	init_game(t_game *game)

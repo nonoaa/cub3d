@@ -15,3 +15,52 @@ void	rotate(t_game *game, double rot)
 	game->player.plane.y = game->player.plane.y * cos(rot)
 		+ tmp * sin(rot);
 }
+
+void	move_wasd(t_coordinate_d *dest, t_game *game)
+{
+	t_player	*player;
+
+	player = &game->player;
+	if (game->key_state.w == true)
+	{
+		dest->x += player->dir.x * player->move_speed;
+		dest->y += player->dir.y * player->move_speed;
+	}
+	if (game->key_state.s == true)
+	{
+		dest->x -= player->dir.x * player->move_speed;
+		dest->y -= player->dir.y * player->move_speed;
+	}
+	if (game->key_state.a == true)
+	{
+		dest->x -= player->plane.x * player->move_speed;
+		dest->y -= player->plane.y * player->move_speed;
+	}
+	if (game->key_state.d == true)
+	{
+		dest->x += player->plane.x * player->move_speed;
+		dest->y += player->plane.y * player->move_speed;
+	}
+}
+
+void	rotate_lr(t_game *game)
+{
+	if (game->key_state.l == true)
+		rotate(game, game->player.rot_speed);
+	if (game->key_state.r == true)
+		rotate(game, -(game->player.rot_speed));
+}
+
+void	moving(t_game *game)
+{
+	t_coordinate_d	dest;
+
+	dest.x = game->player.pos.x;
+	dest.y = game->player.pos.y;
+	move_wasd(&dest, game);
+	rotate_lr(game);
+	if (game->map.map[(int)(dest.x)][(int)(game->player.pos.y)] != '1')
+		game->player.pos.x = dest.x;
+	if (game->map.map[(int)(game->player.pos.x)][(int)(dest.y)] != '1')
+		game->player.pos.y = dest.y;
+}
