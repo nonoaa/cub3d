@@ -12,7 +12,7 @@ MLX_PATH = opengl
 MLXFLAGS = -L$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit
 
 SRC	= ./srcs
-SOURCES = cub3d.c\
+SOURCES = main.c\
 			arg_check.c\
 			check_map.c\
 			get_next_line.c\

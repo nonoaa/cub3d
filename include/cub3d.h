@@ -23,8 +23,8 @@
 # include "../libft/libft.h"
 # include "get_next_line.h"
 
-# define HEIGHT 1240
-# define WIDTH 880
+# define HEIGHT 880
+# define WIDTH 1320
 # define WALL_WIDTH 64
 # define WALL_HEIGHT 64
 # define NORTH_RADIANS 0.01
