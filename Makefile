@@ -43,10 +43,9 @@ clean	:
 	rm -rf $(OBJS)
 	make clean -C $(LIB_DIR)/
 	make clean -C $(MLX_PATH)/
-	make -C libft clean
 
 fclean	: clean
-	rm -rf $(NAME) 
+	rm -rf $(NAME) $(LDLIBS)
 
 re		: fclean all
 
