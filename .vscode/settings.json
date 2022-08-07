@@ -1,8 +1,0 @@
-{
-    "makefile.extensionOutputFolder": "./.vscode",
-    "files.associations": {
-        "algorithm": "c",
-        "locale": "c",
-        "__bit_reference": "c"
-    }
-}
