@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_to_arr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: junylee <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/07 20:20:11 by junylee           #+#    #+#             */
+/*   Updated: 2022/08/07 20:20:12 by junylee          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
 void	free_node(void *content)
@@ -42,10 +54,10 @@ void	fill_space(char **map, int wid, int hei)
 	}
 }
 
-char **lst_to_arr(t_game *game, t_list *head)
+char	**lst_to_arr(t_game *game, t_list *head)
 {
 	int		i;
-	char **map;
+	char	**map;
 	t_list	*curr;
 
 	i = 0;
