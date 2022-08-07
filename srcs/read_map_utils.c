@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/07 20:25:55 by byahn             #+#    #+#             */
+/*   Updated: 2022/08/07 20:25:57 by byahn            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int is_repeat(t_game *game, t_type type)
+int	is_repeat(t_game *game, t_type type)
 {
-    if (type == E_NO && game->map.img[0].img_ptr)
+	if (type == E_NO && game->map.img[0].img_ptr)
 		return (1);
 	else if (type == E_EA && game->map.img[1].img_ptr)
 		return (1);
@@ -17,27 +29,27 @@ int is_repeat(t_game *game, t_type type)
 	return (0);
 }
 
-void    parse_info(char** line, t_type type)
+void	parse_info(char **line, t_type type)
 {
-    char    **split;
-    int     len;
-    
-    if (type == E_MAP)
-        return ;
-    split = ft_split(*line, ' ');
-    if (!split)
-        err_exit("malloc error");
-    len = arr_len(split);
-    if (len != 2)
-        err_exit("wrong amount of value");
-    free(*line);
-    *line = ft_strdup(split[1]);
-    free_split(split);
+	char	**split;
+	int		len;
+
+	if (type == E_MAP)
+		return ;
+	split = ft_split(*line, ' ');
+	if (!split)
+		err_exit("malloc error");
+	len = arr_len(split);
+	if (len != 2)
+		err_exit("wrong amount of value");
+	free(*line);
+	*line = ft_strdup(split[1]);
+	free_split(split);
 }
 
-t_img_info load_img(void *mlx, char *path)
+t_img_info	load_img(void *mlx, char *path)
 {
-    t_img_info	img;
+	t_img_info	img;
 	void		*ptr;
 	int			w;
 	int			h;
@@ -53,9 +65,9 @@ t_img_info load_img(void *mlx, char *path)
 	return (img);
 }
 
-void handle_texture(t_game *game, char *path, t_type type)
+void	handle_texture(t_game *game, char *path, t_type type)
 {
-    if (type == E_NO)
+	if (type == E_NO)
 		game->map.img[0] = load_img(game->mlx_ptr, path);
 	else if (type == E_EA)
 		game->map.img[1] = load_img(game->mlx_ptr, path);
@@ -65,17 +77,17 @@ void handle_texture(t_game *game, char *path, t_type type)
 		game->map.img[3] = load_img(game->mlx_ptr, path);
 }
 
-void handle_color(t_map_info *map, char *colors, t_type type)
+void	handle_color(t_map_info *map, char *colors, t_type type)
 {
-    char    **split;
-    int     len;
+	char	**split;
+	int		len;
 
-    split = ft_split(colors, ',');
-    if (!split)
-        err_exit("malloc error");
-    len = arr_len(split);
-    if (len != 3)
-        err_exit("wrong amount of value");
+	split = ft_split(colors, ',');
+	if (!split)
+		err_exit("malloc error");
+	len = arr_len(split);
+	if (len != 3)
+		err_exit("wrong amount of value");
 	if (type == E_FLOOR)
 	{
 		map->floor = ft_atoi_ad(split[0]) << 16
@@ -88,5 +100,5 @@ void handle_color(t_map_info *map, char *colors, t_type type)
 			| ft_atoi_ad(split[1]) << 8 | ft_atoi_ad(split[2]);
 		map->ceiling_flag = 1;
 	}
-    free_split(split);
+	free_split(split);
 }
