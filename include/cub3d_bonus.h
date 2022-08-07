@@ -124,6 +124,7 @@ typedef struct s_game
 	t_map_info		map;
 	t_dda_calc		dda_calc;
 	t_dda_draw		dda_draw;
+	t_coordinate_i	mouse;
 }	t_game;
 
 typedef enum e_type
@@ -268,5 +269,13 @@ void	draw_line(int x, t_game *game, t_img_info *img);
 */
 
 void	draw_minimap(t_game *game, t_img_info *img);
+
+/*
+** =============================================================================
+** draw_minimap.c
+** =============================================================================
+*/
+
+void	update_mouse(t_game *game);
 
 #endif

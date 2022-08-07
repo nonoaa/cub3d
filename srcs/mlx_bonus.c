@@ -4,6 +4,7 @@ int	main_loop_bonus(t_game *game)
 {
 	t_img_info	screen;
 
+	update_mouse(game);
 	moving(game);
 	screen.img_ptr = mlx_new_image(game->mlx_ptr, WIDTH, HEIGHT);
 	screen.addr = mlx_get_data_addr(screen.img_ptr, &screen.bpp,
