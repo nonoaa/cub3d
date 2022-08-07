@@ -79,7 +79,7 @@ void	draw_minimap(t_game *game, t_img_info *img)
 		while (y < game->map.map_width)
 		{
 			if (x == (int)game->player.pos.x && y == (int)game->player.pos.y)
-				fill_squares(img, (int)(MINIMAP_SIZE * x), (int)(MINIMAP_SIZE * y), 0x0000ff);
+				fill_squares(img, (int)(MINIMAP_SIZE * x), (int)(MINIMAP_SIZE * y), 0xff0000);
 			else if (game->map.map[x][y] == '0')
 				fill_squares(img, (int)(MINIMAP_SIZE * x), (int)(MINIMAP_SIZE * y), 0xffffff);
 			else
@@ -88,5 +88,5 @@ void	draw_minimap(t_game *game, t_img_info *img)
 		}
 		x++;
 	}
-	draw_ray(game, img);
+	// draw_ray(game, img);
 }
