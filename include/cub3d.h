@@ -155,8 +155,8 @@ typedef enum e_type
 ** =============================================================================
 */
 
-int name_check(char *str);
-int arg_check(int argc, char **argv, t_map_info *map);
+int			name_check(char *str);
+int			arg_check(int argc, char **argv, t_map_info *map);
 
 /*
 ** =============================================================================
@@ -164,11 +164,11 @@ int arg_check(int argc, char **argv, t_map_info *map);
 ** =============================================================================
 */
 
-void	handle_character(t_game *game, char c, int row, int col);
-int	count_source(t_game *game, char **map);
-int	wall_surrounded(t_game *game, int row, int col);
-int	wall_check(t_game *game, int i, int j, char **map);
-void	check_map(t_game *game);
+void		handle_character(t_game *game, char c, int row, int col);
+int			count_source(t_game *game, char **map);
+int			wall_surrounded(t_game *game, int row, int col);
+int			wall_check(t_game *game, int i, int j, char **map);
+void		check_map(t_game *game);
 
 /*
 ** =============================================================================
@@ -176,9 +176,9 @@ void	check_map(t_game *game);
 ** =============================================================================
 */
 
-void	init_key_state(t_key *key);
-void	init_player(t_player *player);
-void	init_game(t_game *game);
+void		init_key_state(t_key *key);
+void		init_player(t_player *player);
+void		init_game(t_game *game);
 
 /*
 ** =============================================================================
@@ -186,10 +186,10 @@ void	init_game(t_game *game);
 ** =============================================================================
 */
 
-void	free_node(void *content);
-void	get_width_height(int *wid, int *hei, t_list *head);
-void	fill_space(char **map, int wid, int hei);
-char **lst_to_arr(t_game *game, t_list *head);
+void		free_node(void *content);
+void		get_width_height(int *wid, int *hei, t_list *head);
+void		fill_space(char **map, int wid, int hei);
+char		**lst_to_arr(t_game *game, t_list *head);
 
 /*
 ** =============================================================================
@@ -197,8 +197,8 @@ char **lst_to_arr(t_game *game, t_list *head);
 ** =============================================================================
 */
 
-void	rotate(t_game *game, double rot);
-void	moving(t_game *game);
+void		rotate(t_game *game, double rot);
+void		moving(t_game *game);
 
 /*
 ** =============================================================================
@@ -206,11 +206,11 @@ void	moving(t_game *game);
 ** =============================================================================
 */
 
-int is_repeat(t_game *game, t_type type);
-void    parse_info(char** line, t_type type);
-t_img_info load_img(void *mlx, char *path);
-void handle_texture(t_game *game, char *path, t_type type);
-void handle_color(t_map_info *map, char *colors, t_type type);
+int			is_repeat(t_game *game, t_type type);
+void		parse_info(char **line, t_type type);
+t_img_info	load_img(void *mlx, char *path);
+void		handle_texture(t_game *game, char *path, t_type type);
+void		handle_color(t_map_info *map, char *colors, t_type type);
 
 /*
 ** =============================================================================
@@ -218,10 +218,10 @@ void handle_color(t_map_info *map, char *colors, t_type type);
 ** =============================================================================
 */
 
-int	map_valid_check(char *str);
-t_type type_info(char *str);
-void handle_info(t_game *game, char *line, t_type type);
-void    read_map(t_game *game);
+int			map_valid_check(char *str);
+t_type		type_info(char *str);
+void		handle_info(t_game *game, char *line, t_type type);
+void		read_map(t_game *game);
 
 /*
 ** =============================================================================
@@ -229,10 +229,10 @@ void    read_map(t_game *game);
 ** =============================================================================
 */
 
-void	err_exit(char *str);
-void	free_split(char **split);
-int		arr_len(char **arr);
-int		ft_atoi_ad(const char *str);
+void		err_exit(char *str);
+void		free_split(char **split);
+int			arr_len(char **arr);
+int			ft_atoi_ad(const char *str);
 
 /*
 ** =============================================================================
@@ -240,10 +240,10 @@ int		ft_atoi_ad(const char *str);
 ** =============================================================================
 */
 
-int		main_loop(t_game *game);
-int		key_press(int keycode, t_game *game);
-int		key_release(int keycode, t_game *game);
-int		end_program(void);
+int			main_loop(t_game *game);
+int			key_press(int keycode, t_game *game);
+int			key_release(int keycode, t_game *game);
+int			end_program(void);
 
 /*
 ** =============================================================================
@@ -251,8 +251,8 @@ int		end_program(void);
 ** =============================================================================
 */
 
-void	draw_ceiling(t_img_info img, int ceiling);
-void	draw_floor(t_img_info img, int floor);
+void		draw_ceiling(t_img_info img, int ceiling);
+void		draw_floor(t_img_info img, int floor);
 
 /*
 ** =============================================================================
@@ -260,7 +260,7 @@ void	draw_floor(t_img_info img, int floor);
 ** =============================================================================
 */
 
-void	draw_wall(t_game *game, t_img_info *img);
+void		draw_wall(t_game *game, t_img_info *img);
 
 /*
 ** =============================================================================
@@ -268,6 +268,6 @@ void	draw_wall(t_game *game, t_img_info *img);
 ** =============================================================================
 */
 
-void	draw_line(int x, t_game *game, t_img_info *img);
+void		draw_line(int x, t_game *game, t_img_info *img);
 
 #endif
