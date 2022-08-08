@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junylee <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: byahn <byahn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 19:35:47 by junylee           #+#    #+#             */
-/*   Updated: 2022/07/20 20:04:49 by junylee          ###   ########.fr       */
+/*   Created: 2022/08/07 20:30:36 by byahn             #+#    #+#             */
+/*   Updated: 2022/08/07 20:30:37 by byahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "../opengl/mlx.h"
 # include <math.h>
@@ -31,6 +31,7 @@
 # define SOUTH_RADIANS 3.14
 # define EAST_RADIANS  4.71
 # define WEST_RADIANS  1.58
+# define MINIMAP_SIZE 7
 
 enum e_event_index
 {
@@ -135,6 +136,7 @@ typedef struct s_game
 	t_map_info		map;
 	t_dda_calc		dda_calc;
 	t_dda_draw		dda_draw;
+	t_coordinate_i	mouse;
 }	t_game;
 
 typedef enum e_type
@@ -236,11 +238,11 @@ int			ft_atoi_ad(const char *str);
 
 /*
 ** =============================================================================
-** mlx.c
+** mlx_bonus.c
 ** =============================================================================
 */
 
-int			main_loop(t_game *game);
+int			main_loop_bonus(t_game *game);
 int			key_press(int keycode, t_game *game);
 int			key_release(int keycode, t_game *game);
 int			end_program(void);
@@ -261,6 +263,8 @@ void		draw_floor(t_img_info img, int floor);
 */
 
 void		draw_wall(t_game *game, t_img_info *img);
+void		init_view(t_game *game, t_dda_calc *v, int x);
+void		dda(t_game *game, t_dda_calc *v);
 
 /*
 ** =============================================================================
@@ -269,5 +273,21 @@ void		draw_wall(t_game *game, t_img_info *img);
 */
 
 void		draw_line(int x, t_game *game, t_img_info *img);
+
+/*
+** =============================================================================
+** draw_minimap.c
+** =============================================================================
+*/
+
+void		draw_minimap(t_game *game, t_img_info *img);
+
+/*
+** =============================================================================
+** draw_minimap.c
+** =============================================================================
+*/
+
+void		update_mouse(t_game *game);
 
 #endif
