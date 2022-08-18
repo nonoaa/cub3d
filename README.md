@@ -5,7 +5,7 @@
 ## 실행화면
 ![cub3d](https://user-images.githubusercontent.com/56538203/183872675-a25117d4-67f2-4e60-a3c6-d562f9f520aa.gif)
 
-## start
+## start (macOS)
 ```
   make bonus
   ./cub3D proper_map.cub
